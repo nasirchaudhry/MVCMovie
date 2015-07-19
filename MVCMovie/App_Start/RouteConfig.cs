@@ -15,9 +15,18 @@ namespace MVCMovie
 
             routes.MapRoute(
                 name: "Default",
+
+                //Lab Part 2: Changed the default url
+
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }            
             );
+
+            //Lab Part 2: Adding the "Hello" route
+            routes.MapRoute(
+           name: "Hello",
+           url: "{controller}/{action}/{name}/{id}"
+       );
         }
     }
 }
