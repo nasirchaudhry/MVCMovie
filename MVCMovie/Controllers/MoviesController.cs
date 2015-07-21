@@ -16,8 +16,19 @@ namespace MVCMovie.Controllers
 
         // GET: Movies
         //Lab Part Eight: Adding Search added the code in ActionResult Index 07/21/2015
-        public ActionResult Index(string searchString)
+        //Part Eight chnaged searchSting to id
+
+        public ActionResult Index(string movieGenre, string searchString)
         {
+            var GenreLst = new List<string>();
+
+            var GenreQry = from d in db.Movies
+                           orderby d.Genre
+                           select d.Genre;
+
+            GenreLst.AddRange(GenreQry.Distinct());
+            ViewBag.movieGenre = new SelectList(GenreLst);
+
             var movies = from m in db.Movies
                          select m;
 
@@ -26,7 +37,12 @@ namespace MVCMovie.Controllers
                 movies = movies.Where(s => s.Title.Contains(searchString));
             }
 
-            return View(movies); 
+            if (!string.IsNullOrEmpty(movieGenre))
+            {
+                movies = movies.Where(x => x.Genre == movieGenre);
+            }
+
+            return View(movies);
         }
 
         // GET: Movies/Details/5
