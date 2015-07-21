@@ -15,9 +15,18 @@ namespace MVCMovie.Controllers
         private MovieDBContext db = new MovieDBContext();
 
         // GET: Movies
-        public ActionResult Index()
+        //Lab Part Eight: Adding Search added the code in ActionResult Index 07/21/2015
+        public ActionResult Index(string searchString)
         {
-            return View(db.Movies.ToList());
+            var movies = from m in db.Movies
+                         select m;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                movies = movies.Where(s => s.Title.Contains(searchString));
+            }
+
+            return View(movies); 
         }
 
         // GET: Movies/Details/5
