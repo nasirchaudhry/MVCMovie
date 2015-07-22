@@ -16,7 +16,7 @@
         <input type="submit" value="Filter" />
     </p>
     }
-</p>
+
 <table class="table">
     <tr>
         <th>
@@ -30,8 +30,10 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Price)
-        </th>
-        <th></th>
+        </th>        
+        <th>
+            @Html.DisplayNameFor(model => model.Rating)
+        </th>        
     </tr>
 
 @foreach (var item in Model) {
@@ -47,6 +49,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>        
+            @Html.DisplayFor(model => item.Rating)        
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
