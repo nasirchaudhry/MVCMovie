@@ -115,7 +115,7 @@ namespace MVCMovie.Controllers
         }
 
         // GET: Movies/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(FormCollection fcNotUsed, int? id = 0)
         {
             if (id == null)
             {
@@ -126,7 +126,9 @@ namespace MVCMovie.Controllers
             {
                 return HttpNotFound();
             }
-            return View(movie);
+            db.Movies.Remove(movie);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         // POST: Movies/Delete/5
